@@ -1,0 +1,39 @@
+create table employee(
+	id char(3) primary key,
+	deptid char(1) not null,
+	name varchar(20),
+	desig varchar(20),
+	basic int,
+	sex char(1));
+	
+describe employee;
+
+insert into employee values ('101','1','anu','typist',3000,'f');
+insert into employee values ('102','2','manu','analyst',5000,'m');
+insert into employee values ('103','1','ramu','manager',8000,'m');
+insert into employee values ('104','3','ashik','analyst',5790,'m');
+insert into employee values ('105','2','neethu','clerk',2345,'f');
+insert into employee values ('106','4','mary','clerk',6535,'f');
+insert into employee values ('107','4','appu','manager',4000,'m');
+
+select * from employee;
+
+select id, name, desig, basic from employee;
+
+select id, name from employee where deptid = '2';
+
+select id, name from employee where desig = 'typist';
+
+select * from employee where desig = 'analyst' OR desig = 'manager';
+
+select * from employee where sex = 'm';
+
+select * from employee where sex = 'f' AND desig = 'typist';
+
+select * from employee where sex = 'm' AND desig = 'clerk' AND basic < 3000;
+
+alter table employee add manager_id char(3);
+
+update employee set manager_id = null where id = '101';
+
+select * from employee;
