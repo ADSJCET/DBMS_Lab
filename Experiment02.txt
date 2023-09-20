@@ -37,3 +37,47 @@ alter table employee add manager_id char(3);
 update employee set manager_id = null where id = '101';
 
 select * from employee;
+
+
+
+
+
+
+
+
+ALTER TABLE employee ADD da FLOAT;
+UPDATE employee SET da = BASIC * .075;
+ALTER TABLE employee ADD hra FLOAT;
+UPDATE employee SET hra = BASIC * .09;
+ALTER TABLE employee ADD netsal FLOAT;
+UPDATE employee SET netsal = BASIC + DA + HRA;
+
+
+SELECT id,name,desig,deptid,basic FROM employee ORDER BY basic DESC;
+
+
+SELECT DISTINCT desig FROM employee;
+
+
+SELECT id,name,deptid,basic FROM employee WHERE (desig = 'manager' OR desig = 'clerk') and (basic BETWEEN 2500 AND 6000);
+
+
+SELECT desig, MAX(basic) AS maxbasicpay FROM employee GROUP BY desig;
+
+
+UPDATE employee SET manager_id=null WHERE id in (101,102,103,105);
+UPDATE employee SET manager_id=102 WHERE id = 104;
+UPDATE employee SET manager_id=103 WHERE id = 107;
+UPDATE employee SET manager_id=106 WHERE id = 105;
+
+
+SELECT e.id, e.name, m.name AS managername FROM employee e LEFT JOIN employee m ON e.manager_id=m.id;
+
+
+SELECT deptid, AVG(basic) AS averagebasicpay FROM employee GROUP BY deptid;
+
+
+SELECT deptid, COUNT(id) AS noofemployee FROM employee GROUP BY deptid;
+
+
+SELECT MAX(basic) as maximumbasicpay from employee;
