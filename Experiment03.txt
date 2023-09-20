@@ -1,0 +1,47 @@
+SELECT CEIL(8.29) FROM dual;
+
+
+SELECT FLOOR(9.76) FROM dual;
+
+
+SELECT SQRT(100) FROM dual;
+
+
+SELECT CEIL(8.29) FROM dual;
+
+
+SELECT LEAST('a','b','c') FROM dual;
+
+
+SELECT GREATEST('a','b','c') FROM dual;
+
+
+SELECT SYSTIMESTAMP FROM dual;
+
+
+SELECT TO_CHAR(sysdate,'mm/dd/yyyy hh24:mi:ss') FROM dual;
+
+
+SELECT ABS(-8.29) FROM dual;
+
+
+CREATE TABLE angle(
+	angle int,
+	sin float,
+	cos float,
+	tan float,
+	cot float,
+	sec float);
+
+
+INSERT INTO angle (angle) values (0);
+INSERT INTO angle (angle) values (30);
+INSERT INTO angle (angle) values (45);
+INSERT INTO angle (angle) values (60);
+INSERT INTO angle (angle) values (90);
+
+
+
+UPDATE angle SET sin = sin(angle*3.14/180);
+UPDATE angle SET cos = cos(angle*3.14/180);
+UPDATE angle SET tan = tan(angle*3.14/180) WHERE angle!=90;
