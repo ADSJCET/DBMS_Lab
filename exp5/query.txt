@@ -8,13 +8,27 @@ create table customer (
 	country char(30)
 );
 
-INSERT INTO customer VALUES (1, 'John Doe', 'Jane Smith', '123 Main St', 'New York', '10001', 'USA');
-INSERT INTO customer VALUES (2, 'Alice Johnson', 'Bob Brown', '456 Elm St', 'Los Angeles', '90001', 'USA');
-INSERT INTO customer VALUES (3, 'Michael Davis', 'Emily Wilson', '789 Oak St', 'Chicago', '60601', 'USA');
-INSERT INTO customer VALUES (4, 'Sarah Thompson', 'David Lee', '321 Pine St', 'Houston', '77001', 'USA');
-INSERT INTO customer VALUES (5, 'Jessica Martinez', 'Daniel Taylor', '654 Maple St', 'Phoenix', '85001', 'USA');
-INSERT INTO customer VALUES (6, 'Matthew Harris', 'Olivia Anderson', '987 Cedar St', 'Philadelphia', '19101', 'USA');
-INSERT INTO customer VALUES (7, 'Sophia Clark', 'James Rodriguez', '654 Birch St', 'San Antonio', '78201', 'USA');
+INSERT INTO customer values (1, 'Amit Sharma', 'Amit', '123 Gandhi Road', 'Mumbai', '400001', 'India');
+INSERT INTO customer values   (2, 'Priya Patel', 'Priya', '456 Taj Mahal Street', 'Delhi', '110001', 'India');
+INSERT INTO customer values   (3, 'Rajesh Singh', 'Rajesh', '789 Lotus Lane', 'Bangalore', '560001', 'India');
+INSERT INTO customer values   (4, 'Anita Kapoor', 'Anita', '234 Spice Market', 'Chennai', '600001', 'India');
+INSERT INTO customer values   (5, 'Vikram Verma', 'Vikram', '567 Tandoori Avenue', 'Hyderabad', '500001', 'India');
+INSERT INTO customer values   (6, 'Meera Nair', 'Meera', '890 Bollywood Road', 'Kolkata', '700001', 'India');
+INSERT INTO customer values   (7, 'Sanjay Reddy', 'Sanjay', '101 Coconut Lane', 'Kochi', '682001', 'India');
+INSERT INTO customer values (8, 'Wei Li', 'Wei', '123 Beijing Road', 'Beijing', '100000', 'China');
+INSERT INTO customer values   (9, 'Xiaoming Chen', 'Xiaoming', '456 Great Wall Street', 'Shanghai', '200000', 'China');
+INSERT INTO customer values   (10, 'Jing Zhang', 'Jing', '789 Forbidden City Lane', 'Xi'an', '710000', 'China');
+INSERT INTO customer values   (11, 'Yan Wang', 'Yan', '234 Silk Road', 'Chengdu', '610000', 'China');
+INSERT INTO customer values (12, 'John Smith', 'John', '123 Main Street', 'New York', '10001', 'USA');
+INSERT INTO customer values   (13, 'Alice Johnson', 'Alice', '456 Oak Avenue', 'Los Angeles', '90002', 'USA');
+INSERT INTO customer values   (14, 'Michael Brown', 'Michael', '789 Elm Road', 'Chicago', '60603', 'USA');
+INSERT INTO customer values   (15, 'Emily Davis', 'Emily', '321 Pine Lane', 'San Francisco', '94104', 'USA');
+INSERT INTO customer values   (16, 'Olivia Smith', 'Olivia', '123 Queen Street', 'London', 'SW1A 1AA', 'Chine');
+INSERT INTO customer values   (17, 'William Jones', 'William', '456 King's Cross Road', 'Edinburgh', 'EH1 1AA', 'China');
+INSERT INTO customer values   (18, 'Ivan Petrov', 'Ivan', '123 Kyiv Street', 'Kyiv', '02000', 'Chine');
+INSERT INTO customer values   (19, 'Elena Kovalenko', 'Elena', '456 Lviv Avenue', 'Lviv', '79000', 'USA');
+INSERT INTO customer values   (20, 'Olena Ivanova', 'Olena', '789 Odessa Lane', 'Odessa', '65000', 'USA');
+
 
 create table employees (
 	id int primary key,
@@ -22,30 +36,49 @@ create table employees (
 	birth varchar(10)
 );
 
-INSERT INTO employees (id, name, birth)
-VALUES (1, 'John Doe', '1990-01-01'),
-       (2, 'Alice Johnson', '1995-02-14'),
-       (3, 'Michael Davis', '1985-03-15'),
-       (4, 'Sarah Thompson', '1992-04-30'),
-       (5, 'Jessica Martinez', '1998-05-21'),
-       (6, 'Matthew Harris', '1989-06-12'),
-       (7, 'Sophia Clark', '1993-07-04');
+INSERT INTO employees VALUES (1, 'John Smith', '1990-03-15');
+INSERT INTO employees VALUES  (2, 'Alice Johnson', '1985-07-22');
+INSERT INTO employees VALUES  (3, 'Michael Brown', '1988-12-10');
+INSERT INTO employees VALUES  (4, 'Emily Davis', '1992-05-28');
+INSERT INTO employees VALUES  (5, 'Robert Wilson', '1983-09-14');
+INSERT INTO employees VALUES  (6, 'Sarah Lee', '1995-02-03');
+
 
 create table orders (
 	id int PRIMARY KEY,
 	eid int,
 	cid int,
-	date varchar(10)
-
-	FOREIGN KEY (cid) REFERENCES customer(id)
-	FOREIGN KEY (eid) REFERENCES employees(id)
+	date varchar(10),
+	FOREIGN KEY (cid) REFERENCES customer(id),
+	FOREIGN KEY (eid) REFERENCES employees(id),
 );
 
-INSERT INTO orders (id, eid, cid, date)
-VALUES (1, 1, 1, '2023-09-30'),
-       (2, 2, 2, '2023-09-30'),
-       (3, 3, 3, '2023-09-30'),
-       (4, 4, 4, '2023-09-30'),
-       (5, 5, 5, '2023-09-30'),
-       (6, 6, 6, '2023-09-30'),
-       (7, 7, 7, '2023-09-30');
+
+INSERT INTO orders VALUES  (1, 1, 1, '2023-09-30');
+INSERT INTO orders VALUES  (2, 2, 2, '2023-09-29');
+INSERT INTO orders VALUES  (3, 3, 3, '2023-09-28');
+INSERT INTO orders VALUES  (4, 4, 4, '2023-09-27');
+INSERT INTO orders VALUES  (5, 5, 5, '2023-09-26');
+INSERT INTO orders VALUES  (6, 6, 6, '2023-09-25');
+INSERT INTO orders VALUES  (7, 1, 7, '2023-09-24');
+INSERT INTO orders VALUES  (8, 2, 8, '2023-09-23');
+INSERT INTO orders VALUES  (9, 3, 9, '2023-09-22');
+INSERT INTO orders VALUES  (10, 1, 10, '2023-09-21');
+INSERT INTO orders VALUES  (11, 1, 11, '2023-09-20');
+INSERT INTO orders VALUES  (12, 1, 12, '2023-09-19');
+INSERT INTO orders VALUES  (13, 1, 13, '2023-09-18');
+INSERT INTO orders VALUES  (14, 1, 14, '2023-09-17');
+INSERT INTO orders VALUES  (15, 1, 15, '2023-09-16');
+INSERT INTO orders VALUES  (16, 1, 16, '2023-09-15');
+INSERT INTO orders VALUES  (17, 1, 17, '2023-09-14');
+INSERT INTO orders VALUES  (18, 1, 18, '2023-09-13');
+INSERT INTO orders VALUES  (19, 1, 19, '2023-09-12');
+INSERT INTO orders VALUES  (20, 1, 20, '2023-09-11');
+
+select count(*) from customer group by country having count(*) > 5;
+
+select country, count(*) as count from customer group by country having count(*) > 5 order by count(*) desc;
+
+/// /// select * from orders group by eid having count(*) > 10;
+
+select * from (select eid as innerEid from orders group by eid having count(*) > 10) join employees e on innerEid = e.id
