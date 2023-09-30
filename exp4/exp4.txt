@@ -1,0 +1,60 @@
+create student, fake demo
+
+
+toatol mark, rank list, pass or fail,
+
+
+create table students (
+	roll int primary key,
+	name varchar(35),
+	physics float,
+	chemistry float,
+	maths float
+);
+
+
+insert into students values 
+	(1, 'Pranav', 19, 12, 30),
+	(2, 'Prithvi', 25, 20, 24),
+	(3, 'Rajat', 30, 10, 28),
+	(4, 'Rohan', 10, 18, 24),
+	(5, 'Rose', 10, 10, 12),
+	(6, 'Ryan', 25, 11, 18);
+
+select avg(physics) from students;
+
+select roll, name, max(maths) from students;
+
+select roll, name, min(chemistry) from students;
+
+select count(*) from students where physics > 11;
+
+select count(*)  from students where (physics > 11 and chemistry > 11 and maths > 24);
+
+alter table students add result char(4);
+
+update students set result='pass' where (physics > 11 and chemistry > 11 and maths > 24);
+
+update students set result='fail' where (physics <= 11 or chemistry <= 11 or maths <= 24);
+
+alter table students add total float;
+
+update students set total= physics + chemistry + maths;
+
+select * from students order by total;
+
+select count(*) * 100 / 10 from students where maths > 24;
+
+select count(*) * 100 / 10 from students where result='pass';
+
+select avg(total) from students;
+
+select count(*) from students where result='pass';
+
+
+
+
+
+
+
+

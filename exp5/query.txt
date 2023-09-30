@@ -1,0 +1,51 @@
+create table customer (
+	id int primary key,
+	name varchar(35),
+	contactName varchar(35),
+	address varchar(50),
+	city char(30),
+	postal varchar(10),
+	country char(30)
+);
+
+INSERT INTO customer VALUES (1, 'John Doe', 'Jane Smith', '123 Main St', 'New York', '10001', 'USA');
+INSERT INTO customer VALUES (2, 'Alice Johnson', 'Bob Brown', '456 Elm St', 'Los Angeles', '90001', 'USA');
+INSERT INTO customer VALUES (3, 'Michael Davis', 'Emily Wilson', '789 Oak St', 'Chicago', '60601', 'USA');
+INSERT INTO customer VALUES (4, 'Sarah Thompson', 'David Lee', '321 Pine St', 'Houston', '77001', 'USA');
+INSERT INTO customer VALUES (5, 'Jessica Martinez', 'Daniel Taylor', '654 Maple St', 'Phoenix', '85001', 'USA');
+INSERT INTO customer VALUES (6, 'Matthew Harris', 'Olivia Anderson', '987 Cedar St', 'Philadelphia', '19101', 'USA');
+INSERT INTO customer VALUES (7, 'Sophia Clark', 'James Rodriguez', '654 Birch St', 'San Antonio', '78201', 'USA');
+
+create table employees (
+	id int primary key,
+	name varchar(35),
+	birth varchar(10)
+);
+
+INSERT INTO employees (id, name, birth)
+VALUES (1, 'John Doe', '1990-01-01'),
+       (2, 'Alice Johnson', '1995-02-14'),
+       (3, 'Michael Davis', '1985-03-15'),
+       (4, 'Sarah Thompson', '1992-04-30'),
+       (5, 'Jessica Martinez', '1998-05-21'),
+       (6, 'Matthew Harris', '1989-06-12'),
+       (7, 'Sophia Clark', '1993-07-04');
+
+create table orders (
+	id int PRIMARY KEY,
+	eid int,
+	cid int,
+	date varchar(10)
+
+	FOREIGN KEY (cid) REFERENCES customer(id)
+	FOREIGN KEY (eid) REFERENCES employees(id)
+);
+
+INSERT INTO orders (id, eid, cid, date)
+VALUES (1, 1, 1, '2023-09-30'),
+       (2, 2, 2, '2023-09-30'),
+       (3, 3, 3, '2023-09-30'),
+       (4, 4, 4, '2023-09-30'),
+       (5, 5, 5, '2023-09-30'),
+       (6, 6, 6, '2023-09-30'),
+       (7, 7, 7, '2023-09-30');
