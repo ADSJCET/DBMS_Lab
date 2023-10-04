@@ -1,0 +1,65 @@
+CREATE TABLE student(
+	roll int primary key,
+	name varchar(35),
+	physics decimal(10,2),
+	chemistry decimal(10,2),
+	maths decimal(10,2));
+
+
+INSERT INTO student VALUES(1, 'Pranav', 19, 12, 30);
+INSERT INTO student VALUES(2, 'Prithvi', 25, 20, 24);
+INSERT INTO student VALUES(3, 'Rajat', 20, 10, 38);
+INSERT INTO student VALUES(4, 'Rohan', 10, 18, 24);
+INSERT INTO student VALUES(5, 'Rose', 10, 10, 12);
+INSERT INTO student VALUES(6, 'Ryan', 25, 11, 18);
+INSERT INTO student VALUES(7, 'Sharon', 11, 18, 20);
+INSERT INTO student VALUES(8, 'Shawn', 13, 11, 25);
+INSERT INTO student VALUES(9, 'Sruthy', 23, 22, 45);
+INSERT INTO student VALUES(10, 'Stephy', 24, 23, 49);
+
+
+SELECT AVG(physics) AS physicsaverage FROM student;
+
+
+SELECT MAX(maths) AS highest_mark_maths FROM student;
+
+
+SELECT MIN(chemistry) AS lowest_mark_chemistry FROM student;
+
+
+SELECT COUNT(*) AS physicspasscount FROM student WHERE physics >= 12;
+
+
+SELECT name AS passlist FROM student WHERE
+	physics >= 12 AND 
+	chemistry >= 12 AND 
+	maths >= 25;
+
+
+ALTER TABLE student ADD(totalmark decimal(10,2), result char(4));
+
+UPDATE student SET totalmark = physics + chemistry + maths;
+
+UPDATE student SET result = 'pass' WHERE
+	physics >= 12 AND 
+	chemistry >= 12 AND 
+	maths >= 25;
+
+UPDATE student SET result = 'fail' WHERE
+	physics < 12 OR 
+	chemistry < 12 OR 
+	maths < 25;
+
+SELECT * FROM student ORDER BY totalmark DESC;
+
+
+SELECT COUNT(*) * 100 / 10 AS mathspasspercent FROM student WHERE maths >= 25;
+
+
+SELECT COUNT(*) * 100 / 10 AS totalpasspercent FROM student WHERE result = 'pass';
+
+
+SELECT AVG(totalmark) AS classaverage FROM student;
+
+
+SELECT COUNT(*) AS passnumber FROM student WHERE result = 'pass';
