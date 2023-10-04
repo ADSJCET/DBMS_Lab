@@ -27,11 +27,11 @@ SELECT ABS(-8.29) FROM dual;
 
 CREATE TABLE angle(
 	angle int,
-	sin float,
-	cos float,
-	tan float,
-	cot float,
-	sec float);
+	sin decimal(10,2),
+	cos decimal(10,2),
+	tan decimal(10,2),
+	cot decimal(10,2),
+	sec decimal(10,2));
 
 
 INSERT INTO angle (angle) values (0);
@@ -45,3 +45,21 @@ INSERT INTO angle (angle) values (90);
 UPDATE angle SET sin = sin(angle*3.14/180);
 UPDATE angle SET cos = cos(angle*3.14/180);
 UPDATE angle SET tan = tan(angle*3.14/180) WHERE angle!=90;
+UPDATE angle SET cot = cos/sin WHERE sin!=0;
+UPDATE angle SET sec = 1/cos WHERE cos!=0;
+SELECT * FROM angle;
+
+
+SELECT REVERSE('nmutuAotedOehT') FROM dual;
+
+SELECT LTRIM('  123223XYZTech') FROM dual;
+
+SELECT RTRIM('123223XYZTech  ') FROM dual;
+
+SELECT RPAD('Computer',12,'x') FROM dual;
+
+SELECT LENGTH('DatabaseManagementSystems') FROM dual;
+
+SELECT CONCAT('Julius ','Caesar') FROM dual;
+
+SELECT SUBSTR('India is my country',7,2) FROM dual;
