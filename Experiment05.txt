@@ -1,0 +1,81 @@
+CREATE TABLE customer(
+	customerid int primary key,
+	customername varchar(20),
+	contactname varchar(20),
+	address varchar(20),
+	city varchar(10),
+	postalcode char(6),
+	country varchar(10));
+	
+INSERT INTO customer VALUES(1, 'Indian Exports', 'Raj Patel', '101 Ganges Rd', 'Mumbai', '400001', 'India');
+INSERT INTO customer VALUES(2, 'XYZ Ltd', 'Jane Doe', '456 Elm St', 'Los Angeles', '902001', 'USA');
+INSERT INTO customer VALUES(3, 'Delhi Traders', 'Suresh Kumar', '202 Yamuna Lane', 'Delhi', '110001', 'India');
+INSERT INTO customer VALUES(4, 'Shanghai Enterprises', 'Zhang Wei', '222 Yangtze Rd', 'Shanghai', '200001', 'China');
+INSERT INTO customer VALUES(5, 'Bangalore Imports', 'Priya Singh', '303 Silk St', 'Bangalore', '560001', 'India');
+INSERT INTO customer VALUES(6, 'Guangzhou Traders', 'Chen Lu', '333 Pearl St', 'Guangzhou', '510001', 'China');
+INSERT INTO customer VALUES(7, 'Asia Trading', 'Li Wei', '444 Oak Lane', 'Beijing', '135460', 'China');
+INSERT INTO customer VALUES(8, 'Chennai Enterprises', 'Amit Gupta', '404 Spice Blvd', 'Chennai', '600001', 'India');
+INSERT INTO customer VALUES(9, 'Chengdu Exports', 'Li Ming', '444 Panda Rd', 'Chengdu', '610001', 'China');
+INSERT INTO customer VALUES(10, 'Hyderabad Exports', 'Anita Reddy', '505 Biryani Ave', 'Hyderabad', '500001', 'India');
+INSERT INTO customer VALUES(11, 'Hong Kong Imports', 'Liu Hui', '555 Dragon St', 'Hong Kong', '999077', 'China');
+INSERT INTO customer VALUES(12, 'Pune Traders', 'Sanjay Desai', '606 Deccan Rd', 'Pune', '411001', 'India');
+INSERT INTO customer VALUES(13, 'California Imports', 'Lisa Davis', '456 Hollywood Blvd', 'Los Angeles', '900002', 'USA');
+INSERT INTO customer VALUES(14, 'Florida Exports', 'Jennifer Brown', '101 Sunshine Ave', 'Miami', '331002', 'USA');
+INSERT INTO customer VALUES(15, 'Beijing Connections', 'Wang Li', '111 Great Wall Lane', 'Beijing', '100001', 'China');
+
+SELECT * FROM customer;
+
+CREATE TABLE employees(
+	employeeid int primary key,
+	lastname varchar(20),
+	firstname varchar(20),
+	birthdate date);
+
+
+INSERT INTO employees values(101, 'Philip', 'Francis', '12-NOV-1995');
+INSERT INTO employees values(102, 'Kumar', 'Raj', '20-JUN-1998');
+INSERT INTO employees values(103, 'Li', 'Yuki', '08-FEB-1992');
+
+SELECT * FROM employees;
+
+
+CREATE TABLE orders(
+	orderid int primary key,
+	customerid int,
+	employeeid int,
+	orderdate date,
+	shipperid int,
+	FOREIGN KEY(customerid)REFERENCES customer(customerid),
+	FOREIGN KEY(employeeid)REFERENCES employees(employeeid));
+
+INSERT INTO orders VALUES(1, 7, 101, '15-JAN-2023', 1);
+INSERT INTO orders VALUES(2, 4, 103, '28-FEB-2023', 2);
+INSERT INTO orders VALUES(3, 8, 101, '10-MAR-2023', 3);
+INSERT INTO orders VALUES(4, 2, 101, '05-JUL-2023', 4);
+INSERT INTO orders VALUES(5, 15, 102, '22-MAY-2023', 5);
+INSERT INTO orders VALUES(6, 11, 101, '19-APR-2023', 6);
+INSERT INTO orders VALUES(7, 1, 101, '27-SEP-2023', 7);
+INSERT INTO orders VALUES(8, 6, 103, '08-JUN-2023', 8);
+INSERT INTO orders VALUES(9, 10, 101, '15-AUG-2023', 9);
+INSERT INTO orders VALUES(10, 5, 101, '29-JUL-2023', 10);
+INSERT INTO orders VALUES(11, 14, 102, '14-JAN-2023', 11);
+INSERT INTO orders VALUES(12, 3, 101, '02-DEC-2023', 12);
+INSERT INTO orders VALUES(13, 9, 101, '20-NOV-2023', 13);
+INSERT INTO orders VALUES(14, 13, 101, '07-OCT-2023', 14);
+INSERT INTO orders VALUES(15, 12, 101, '25-SEP-2023', 15);
+
+SELECT * FROM orders;
+
+
+SELECT country, COUNT(*) AS customers FROM customer 
+	GROUP BY country HAVING COUNT(*) > 5;
+
+
+SELECT country, COUNT(*) AS customers FROM customer 
+	GROUP BY country HAVING COUNT(*) > 5 
+	ORDER BY COUNT(*) DESC;
+
+
+SELECT employees.employeeid,employees.firstname,count(orders.orderid) as Order_count FROM employees
+	JOIN orders ON employees.employeeid=orders.employeeid
+	GROUP BY employees.employeeid,employees.firstname having count(orders.orderid)>10;
