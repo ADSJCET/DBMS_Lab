@@ -61,3 +61,5 @@ select count(*) from customer group by country having count(*) > 5;
 select country, count(*) as count from customer group by country having count(*) > 5 order by count(*) desc;
 
 select * from (select eid as innerEid from orders group by eid having count(*) > 10) join employees e on innerEid = e.id
+
+select * from (select eid as innerEid, count(*) as no_of_order from orders group by eid having count(*) > 10) join employees e on innerEid = e.id;
