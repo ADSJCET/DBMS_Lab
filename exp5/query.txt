@@ -1,12 +1,4 @@
-create table customer (
-	id int primary key,
-	name varchar(35),
-	contactName varchar(35),
-	address varchar(50),
-	city char(30),
-	postal varchar(10),
-	country char(30)
-);
+create table customer (id int primary key, name varchar(35), contactName varchar(35), address varchar(50), city char(30), postal varchar(10), country char(30) );
 
 INSERT INTO customer values (1, 'Amit Sharma', 'Amit', '123 Gandhi Road', 'Mumbai', '400001', 'India');
 INSERT INTO customer values   (2, 'Priya Patel', 'Priya', '456 Taj Mahal Street', 'Delhi', '110001', 'India');
@@ -17,24 +9,20 @@ INSERT INTO customer values   (6, 'Meera Nair', 'Meera', '890 Bollywood Road', '
 INSERT INTO customer values   (7, 'Sanjay Reddy', 'Sanjay', '101 Coconut Lane', 'Kochi', '682001', 'India');
 INSERT INTO customer values (8, 'Wei Li', 'Wei', '123 Beijing Road', 'Beijing', '100000', 'China');
 INSERT INTO customer values   (9, 'Xiaoming Chen', 'Xiaoming', '456 Great Wall Street', 'Shanghai', '200000', 'China');
-INSERT INTO customer values   (10, 'Jing Zhang', 'Jing', '789 Forbidden City Lane', 'Xi'an', '710000', 'China');
+INSERT INTO customer values   (10, 'Jing Zhang', 'Jing', '789 Forbidden City Lane', 'Xian', '710000', 'China');
 INSERT INTO customer values   (11, 'Yan Wang', 'Yan', '234 Silk Road', 'Chengdu', '610000', 'China');
 INSERT INTO customer values (12, 'John Smith', 'John', '123 Main Street', 'New York', '10001', 'USA');
 INSERT INTO customer values   (13, 'Alice Johnson', 'Alice', '456 Oak Avenue', 'Los Angeles', '90002', 'USA');
 INSERT INTO customer values   (14, 'Michael Brown', 'Michael', '789 Elm Road', 'Chicago', '60603', 'USA');
 INSERT INTO customer values   (15, 'Emily Davis', 'Emily', '321 Pine Lane', 'San Francisco', '94104', 'USA');
 INSERT INTO customer values   (16, 'Olivia Smith', 'Olivia', '123 Queen Street', 'London', 'SW1A 1AA', 'Chine');
-INSERT INTO customer values   (17, 'William Jones', 'William', '456 King's Cross Road', 'Edinburgh', 'EH1 1AA', 'China');
+INSERT INTO customer values   (17, 'William Jones', 'William', '456 Kings Cross Road', 'Edinburgh', 'EH1 1AA', 'China');
 INSERT INTO customer values   (18, 'Ivan Petrov', 'Ivan', '123 Kyiv Street', 'Kyiv', '02000', 'Chine');
 INSERT INTO customer values   (19, 'Elena Kovalenko', 'Elena', '456 Lviv Avenue', 'Lviv', '79000', 'USA');
 INSERT INTO customer values   (20, 'Olena Ivanova', 'Olena', '789 Odessa Lane', 'Odessa', '65000', 'USA');
 
 
-create table employees (
-	id int primary key,
-	name varchar(35),
-	birth varchar(10)
-);
+create table employees (id int primary key, name varchar(35), birth varchar(10));
 
 INSERT INTO employees VALUES (1, 'John Smith', '1990-03-15');
 INSERT INTO employees VALUES  (2, 'Alice Johnson', '1985-07-22');
@@ -44,14 +32,7 @@ INSERT INTO employees VALUES  (5, 'Robert Wilson', '1983-09-14');
 INSERT INTO employees VALUES  (6, 'Sarah Lee', '1995-02-03');
 
 
-create table orders (
-	id int PRIMARY KEY,
-	eid int,
-	cid int,
-	date varchar(10),
-	FOREIGN KEY (cid) REFERENCES customer(id),
-	FOREIGN KEY (eid) REFERENCES employees(id),
-);
+create table orders (id int PRIMARY KEY, eid int,cid int, dates varchar(10), FOREIGN KEY (cid) REFERENCES customer(id), FOREIGN KEY (eid) REFERENCES employees(id));
 
 
 INSERT INTO orders VALUES  (1, 1, 1, '2023-09-30');
@@ -78,7 +59,5 @@ INSERT INTO orders VALUES  (20, 1, 20, '2023-09-11');
 select count(*) from customer group by country having count(*) > 5;
 
 select country, count(*) as count from customer group by country having count(*) > 5 order by count(*) desc;
-
-/// /// select * from orders group by eid having count(*) > 10;
 
 select * from (select eid as innerEid from orders group by eid having count(*) > 10) join employees e on innerEid = e.id
