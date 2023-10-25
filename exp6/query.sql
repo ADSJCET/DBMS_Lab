@@ -114,7 +114,10 @@ SELECT custname, address FROM customers WHERE custid NOT IN(
     SELECT custid FROM orders WHERE itemid IN(
         SELECT itemid FROM items WHERE itemname = 'Samsung GalaxyS4'));
 
-
-
+        
+        
 
 SELECT * FROM customers LEFT OUTER JOIN orders ON customers.custid = orders.custid;
+
+
+
