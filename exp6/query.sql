@@ -98,8 +98,8 @@ SELECT custid, custname FROM customers WHERE custid NOT IN(SELECT custid FROM de
 
 
 
-SELECT custid, count(custid) FROM orders GROUP BY custid HAVING count(custid) = (
-    SELECT MAX(count(custid)) FROM orders GROUP BY custid);
+SELECT custid, custname FROM customers WHERE custid IN (SELECT custid FROM orders GROUP BY custid HAVING count(custid) = (
+    SELECT MAX(count(custid)) FROM orders GROUP BY custid));
 
 
 
