@@ -84,3 +84,37 @@ SELECT itemid FROM orders UNION(
 	SELECT itemid FROM orders WHERE orderid NOT IN(
 		SELECT orderid FROM delivery));
 
+
+SELECT custid, custname FROM customers WHERE custid IN(SELECT custid FROM orders)
+INTERSECT
+SELECT custid, custname FROM customers WHERE custid IN(SELECT custid FROM delivery);
+
+
+
+SELECT custid, custname FROM customers WHERE custid IN(SELECT custid FROM orders)
+MINUS
+SELECT custid, custname FROM customers WHERE custid NOT IN(SELECT custid FROM delivery);
+
+
+
+
+SELECT custid, count(custid) FROM orders GROUP BY custid HAVING count(custid) = (
+    SELECT MAX(count(custid)) FROM orders GROUP BY custid);
+
+
+
+
+SELECT custname, address FROM customers WHERE custid IN(
+    SELECT custid FROM orders WHERE itemid IN(
+        SELECT itemid FROM items WHERE price > 5000));
+
+
+
+SELECT custname, address FROM customers WHERE custid NOT IN(
+    SELECT custid FROM orders WHERE itemid IN(
+        SELECT itemid FROM items WHERE itemname = 'Samsung GalaxyS4'));
+
+
+
+
+SELECT * FROM customers LEFT OUTER JOIN orders ON customers.custid = orders.custid;
