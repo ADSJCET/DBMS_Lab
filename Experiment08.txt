@@ -1,0 +1,17 @@
+SELECT * FROM bank;
+
+GRANT SELECT, INSERT ON bank TO c21ad13;
+
+
+
+
+
+
+
+
+
+
+
+SELECT * FROM bank;
+
+REVOKE SELECT, INSERT ON bank FROM c21ad13;
