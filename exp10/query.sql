@@ -1,5 +1,9 @@
-// find factorial in plsql
+-- plsql input turn on
+
 SET SERVEROUTPUT ON;
+
+-- find factorial in plsql
+
 DECLARE
     n number := 5;
     result number := 1;
@@ -14,7 +18,6 @@ end;
 
 -- PLSQL TO FIND greastest three number 
 
-SET SERVEROUTPUT ON;
 DECLARE
     a number := 10;
     b number := 20;
@@ -33,7 +36,6 @@ end;
 
 -- plsql to implement a calulator
 
-SET SERVEROUTPUT ON;
 DECLARE
     a number := 10;
     b number := 20;
@@ -57,7 +59,6 @@ end;
 
 -- generate fibonacci series in plsql
 
-SET SERVEROUTPUT ON;
 DECLARE
     n number := 10;
     a number := 0;
@@ -77,7 +78,6 @@ end;
 
 -- PLSQL FOR ZERO DEVIDED BY EXCEPTIONS
 
-SET SERVEROUTPUT ON;
 DECLARE
     a number := 10;
     b number := 0;
@@ -94,7 +94,6 @@ end;
 
 -- PLSQL FOR NO DATA FOUND EXCEPTIONS
 
-SET SERVEROUTPUT ON;
 DECLARE
     a number := 10;
     b number := 20;
