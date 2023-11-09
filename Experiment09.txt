@@ -1,0 +1,145 @@
+1) To print hello world
+
+SET SERVEROUTPUT ON
+BEGIN
+	dbms_output.put_line('Hello World');
+END;
+/
+
+
+2) To add two numbers
+
+DECLARE
+	a number:= 8;
+	b number:= 2;
+	c number;
+BEGIN
+	c := a + b;
+	dbms_output.put_line('Sum is: ' || c);
+END;
+/
+
+
+3) To add two numbers read from the user
+
+DECLARE
+	a number;
+	b number;
+	c number;
+BEGIN
+	a := &a;
+	b := &b;
+	c := a + b;
+	dbms_output.put_line('Sum is: ' || c);
+END;
+/
+
+
+4) To find the factorial of a number
+
+DECLARE
+	n number;
+	f number;
+	
+BEGIN
+	n := &n;
+	f := 1;
+	WHILE n>0 LOOP
+		f := f*n;
+		n := n-1;
+	END LOOP;
+	dbms_output.put_line('Factorial is: ' ||f);
+END;
+/
+	
+
+5) To find the greatest of three numbers
+
+DECLARE
+	a number := &a;
+	b number := &b;
+	c number := &c;
+BEGIN
+	IF a>b AND a>c THEN
+		dbms_output.put_line('The greatest number is: ' || a);
+	ELSIF b>a AND b>c THEN
+		dbms_output.put_line('The greatest number is: ' || b);
+	ELSE
+		dbms_output.put_line('The greatest number is: ' || c);
+	END IF;
+END;
+/
+
+6) Implement a simple calculator
+
+DECLARE
+	a number := &a;
+	b number := &b;
+	s number;
+BEGIN
+	s := &s;
+	IF s = 1 THEN
+		dbms_output.put_line('The sum is: ' || (a+b));
+	ELSIF s = 2 THEN
+		dbms_output.put_line('The difference is: ' || (a-b));
+	ELSIF s = 3 THEN
+		dbms_output.put_line('The product is: ' || (a*b));
+	ELSIF s = 4 THEN
+		dbms_output.put_line('The quotient is: ' || (a/b));
+	ELSE
+		dbms_output.put_line('Wrong Choice');
+	END IF;
+END;
+/
+
+
+
+7) Program to generate fibonacci series
+
+DECLARE
+	a number := 0;
+	b number := 1;
+	n number := &n;
+	i number;
+	t number :=0;
+BEGIN
+	FOR i IN 1..n LOOP
+		dbms_output.put_line(a);
+		t := a;
+		a := b;
+		b := t +b;
+	END LOOP;
+END;
+/
+
+
+
+8) Show divide by zero exception
+
+DECLARE
+	a number := &a;
+	b number := &b;
+	s number;
+BEGIN
+	s := a/b;
+	dbms_output.put_line('Quotient: '||s);
+EXCEPTION
+	WHEN ZERO_DIVIDE THEN
+		dbms_output.put_line('Error: Division with zero');
+END;
+/
+
+9) Show no data found exception
+
+DECLARE
+	a number := 5;
+	b number := 4;
+	c number;
+	
+BEGIN
+	SELECT a INTO c FROM DUAL WHERE a<b;
+EXCEPTION
+	WHEN NO_DATA_FOUND THEN
+		dbms_output.put_line('Error: No data found');
+END;
+/
