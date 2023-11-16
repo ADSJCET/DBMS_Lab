@@ -1,0 +1,133 @@
+CREATE OR REPLACE FUNCTION addnumber(a IN NUMBER, b IN NUMBER)
+RETURN NUMBER 
+AS
+s NUMBER;
+BEGIN
+	s := a+b;
+RETURN s;
+END;
+/
+
+
+DECLARE
+	num1 number;
+BEGIN
+	num1 := addnumber(2,8);
+	dbms_output.put_line('Sum is: '||num1);
+END;
+/
+
+
+
+
+CREATE OR REPLACE FUNCTION fact(n NUMBER)
+RETURN NUMBER 
+AS
+f NUMBER := 1;
+BEGIN
+	FOR i IN 1..n LOOP
+		f := f*i;
+	END LOOP;
+RETURN f;
+END;
+/
+
+
+
+DECLARE
+	n number;
+	f number;
+	
+BEGIN
+	n := &n;
+	f := fact(n);
+	dbms_output.put_line('Factorial is: ' ||f);
+END;
+/
+
+
+
+CREATE TABLE student_details(
+	roll INT,
+	marks INT,
+	phone CHAR(10));
+INSERT INTO student_details VALUES(1, 72, '8086688441');
+INSERT INTO student_details VALUES(2, 78, '9778429912');
+INSERT INTO student_details VALUES(3, 65, '8281612913');
+
+CREATE OR REPLACE PROCEDURE pr1
+AS
+BEGIN
+	UPDATE student_details SET marks = marks * 1.05;
+END;
+/
+
+
+SELECT * FROM student_details;
+
+
+BEGIN
+	pr1;
+END;
+/
+
+SELECT * FROM student_details;
+
+
+
+CREATE TABLE customer_details(
+	cust_id CHAR(3) UNIQUE,
+	cust_name VARCHAR(10),
+	address VARCHAR(20));
+
+
+CREATE TABLE emp_details(
+	empid CHAR(2) UNIQUE,
+	emp_name VARCHAR(10),
+	salary INT);
+
+
+CREATE TABLE cust_count(
+	count_row INT);
+
+
+
+
+
+CREATE OR REPLACE TRIGGER insert_msg
+AFTER INSERT ON customer_details
+FOR EACH ROW
+BEGIN
+	dbms_output.put_line('New row inserted in customer_details table!');
+END;
+/
+
+
+INSERT INTO customer_details VALUES('100','Manu','Mumbai');
+
+
+
+CREATE OR REPLACE TRIGGER salary_msg
+AFTER INSERT ON emp_details
+FOR EACH ROW
+WHEN (new.salary > 20000)
+BEGIN
+	dbms_output.put_line('Salary more than 20000!');
+END;
+/
+
+INSERT INTO emp_details VALUES('10','Patel', 21000);
+INSERT INTO emp_details VALUES('11','Ameer', 18000);
+
+
+CREATE OR REPLACE TRIGGER counter
+AFTER INSERT OR DELETE
+ON cust_count
+BEGIN
+	IF INSERTING THEN
+		UPDATE cust_count SET count_row = count_row+1;
+	IF DELETING THEN
+		UPDATE cust_count SET count_row = count_row-1;
+	END IF;
+END;
+/
