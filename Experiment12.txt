@@ -1,0 +1,175 @@
+CREATE TABLE bankdetails(
+	accno CHAR(11),
+	name VARCHAR(15),
+	balance INT,
+	adate DATE);
+INSERT INTO bankdetails VALUES('42217647023','Suresh','10000','04-FEB-13');
+INSERT INTO bankdetails VALUES('84632354765','Ramesh','20000','05-MAR-14');
+INSERT INTO bankdetails VALUES('68426587235','Mahesh','15000','06-APR-15');
+
+SELECT * FROM bankdetails;
+
+CREATE TABLE bankintr(
+	accno CHAR(11),
+	intr INT);
+
+
+DECLARE
+	CURSOR temp IS
+		SELECT accno, balance FROM bankdetails;
+		rec temp %ROWTYPE;
+	interest INT;
+BEGIN
+	OPEN temp;
+	LOOP
+		FETCH temp into rec;
+		EXIT WHEN temp%NOTFOUND;
+		interest := 0.08*rec.balance;
+		INSERT INTO bankintr VALUES(rec.accno,interest);
+	END LOOP;
+	CLOSE temp;
+END;
+/
+
+SELECT * FROM bankintr;
+
+
+
+CREATE TABLE student(
+	id CHAR(3),
+	name VARCHAR(10),
+	m1 INT,
+	m2 INT,
+	m3 INT,
+	grade CHAR(1));
+
+INSERT INTO student (id, name, m1, m2, m3)
+	VALUES('001','Tom',70,80,90);
+INSERT INTO student (id,name,m1,m2,m3)
+	VALUES('002','Aneeta',65,85,92);
+INSERT INTO student (id,name,m1,m2,m3)
+	VALUES('003','Don',89,93,54);
+INSERT INTO student (id,name,m1,m2,m3)
+	VALUES('004','Ben',96,67,65);
+INSERT INTO student (id,name,m1,m2,m3)
+	VALUES('005','Oggy',78,45,97);
+
+SELECT * FROM student;
+
+
+
+DECLARE
+	CURSOR temp IS
+		SELECT id, m1, m2, m3 FROM student;
+		row temp %ROWTYPE;
+	total INT;
+	gr CHAR(1);
+	
+BEGIN
+	OPEN temp;
+	LOOP
+		FETCH temp into row;
+		EXIT WHEN temp%NOTFOUND;
+		total := row.m1 + row.m2 + row.m3;
+		IF(total/3) >89 THEN
+			gr := 'A';
+		ELSIF(total/3) >79 THEN
+			gr := 'B';
+		ELSIF(total/3) >69 THEN
+			gr := 'C';
+		ELSIF(total/3) >59 THEN
+			gr := 'D';
+		ELSE
+			gr := 'E';
+		END IF;
+		UPDATE student SET grade = gr WHERE id = row.id;
+
+	END LOOP;
+	CLOSE temp;
+END;
+/
+
+SELECT * FROM student;
+
+CREATE TABLE people_list(
+	id CHAR(3),
+	name VARCHAR(10),
+	dt_joining DATE,
+	place VARCHAR(15));
+
+INSERT INTO people_list VALUES('101','Ramesh','04-FEB-13','Kochi');
+INSERT INTO people_list VALUES('102','Suresh','05-MAR-12','Kottayam');
+INSERT INTO people_list VALUES('103','Mahesh','06-FEB-14','Calicut');
+
+SELECT * FROM people_list;
+
+CREATE TABLE exp_list(
+	id CHAR(3),
+	name VARCHAR(10),
+	exp INT);
+
+DECLARE
+	CURSOR temp IS
+		SELECT id, name, dt_joining FROM people_list;
+		row temp %ROWTYPE;
+	exp INT;
+	
+BEGIN
+	OPEN temp;
+	LOOP
+		FETCH temp into row;
+		EXIT WHEN temp%NOTFOUND;
+		exp := MONTHS_BETWEEN(SYSDATE, row.dt_joining)/12;
+		IF exp >10 THEN
+			INSERT INTO exp_list VALUES(row.id, row.name, exp);
+		END IF;
+
+	END LOOP;
+	CLOSE temp;
+END;
+/
+
+SELECT * FROM exp_list;
+
+
+CREATE TABLE employee(
+	id CHAR(3),
+	name VARCHAR(10),
+	monthly_salary INT);
+
+INSERT INTO employee VALUES('201','Ramesh', 5600);
+INSERT INTO employee VALUES('202','Suresh', 4800);
+INSERT INTO employee VALUES('203','Mahesh', 55000);
+INSERT INTO employee VALUES('204','Umesh', 20000);
+INSERT INTO employee VALUES('205','Rupesh', 4500);
+
+SELECT * FROM employee;
+
+
+DECLARE
+	CURSOR temp IS
+		SELECT id, monthly_salary FROM employee;
+		row temp %ROWTYPE;
+	annualsal INT;
+	sal INT;
+	
+BEGIN
+	OPEN temp;
+	LOOP
+		FETCH temp into row;
+		EXIT WHEN temp%NOTFOUND;
+		annualsal := row.monthly_salary * 12;
+		IF annualsal > 500000 THEN
+			sal := row.monthly_salary * 1.1;
+		ELSIF annualsal > 200000 THEN
+			sal := row.monthly_salary * 1.15;
+		ELSIF annualsal > 60000 THEN
+			sal := row.monthly_salary * 1.2;
+		ELSE
+			sal := row.monthly_salary * 1.25;
+		END IF;
+		UPDATE employee SET monthly_salary = sal WHERE id = row.id;
+	END LOOP;
+	CLOSE temp;
+END;
+/
