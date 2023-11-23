@@ -1,0 +1,57 @@
+CREATE OR REPLACE PACKAGE pk1 AS
+	PROCEDURE proc1(a INT, b INT);
+	PROCEDURE proc2(s INT);
+	FUNCTION fn11(n INT) RETURN VARCHAR;
+	FUNCTION fn22(p INT, q INT, r INT) RETURN INT;
+END pk1;
+/
+
+CREATE OR REPLACE PACKAGE BODY pk1 AS
+	PROCEDURE proc1(a INT, b INT) IS
+	BEGIN 
+		dbms_output.put_line('Sum: '||(a+b));
+		dbms_output.put_line('Average: '||((a+b)/2));
+		dbms_output.put_line('Product: '||(a*b));
+	END proc1;
+	
+	PROCEDURE proc2(s INT) IS
+	BEGIN 
+		dbms_output.put_line('Square root: '||sqrt(s));
+	END proc2;
+
+	FUNCTION fn11(n INT) RETURN VARCHAR IS
+	BEGIN 
+		IF (MOD(n,2) = 0) THEN
+			RETURN 'Even';
+		ELSE
+			RETURN 'Odd';
+		END IF;
+	END fn11;
+
+	FUNCTION fn22(p INT, q INT, r INT) RETURN INT IS
+	BEGIN 
+		RETURN (p+q+r);
+	END fn22;
+
+END pk1;
+/
+
+DECLARE
+	a INT := &a;
+	b INT := &b;
+	s INT := &s;
+	n INT := &n;
+	p INT := &p;
+	q INT := &q;
+	r INT := &r;
+	eod VARCHAR(10);
+	res INT;
+BEGIN
+	pk1.proc1(a,b);
+	pk1.proc2(s);
+	eod := pk1.fn11(n);
+	res := pk1.fn22(p,q,r);
+	dbms_output.put_line(n||' is '||eod);
+	dbms_output.put_line('Sum is '||res);
+END;
+/
